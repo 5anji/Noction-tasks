@@ -1,57 +1,83 @@
 #include <iostream>
-#include <cstring>
-class Node {
-public:
-  int data;
+
+struct Node {
+  std::string data;
   Node *next;
 };
 
-void display_list(Node *n) {
-  while (n != NULL) {
-    std::cout << n->data << ' ';
-    n = n->next;
+class Linked_List {
+private:
+  Node *head;
+  Node *end;
+
+public:
+  Linked_List();
+  void Print_List();
+  void Add_Node_End(std::string data);
+};
+
+int main() {
+  char checker;
+  Linked_List list;
+  do {
+    std::cout << "1 - Display the list" << std::endl;
+    std::cout << "2 - Add node at the end" << std::endl;
+    std::cout << "c - Clear Screen" << std::endl;
+    std::cout << "q - Exit" << std::endl;
+
+    std::cout << "Choose option >>> ";
+    std::cin >> checker;
+
+    checker = tolower(checker);
+
+    switch (checker) {
+    case '1':
+      list.Print_List();
+      break;
+    case '2': {
+      std::string temp;
+      std::cout << "Input data: ";
+      std::cin >> temp;
+      list.Add_Node_End(temp);
+      break;
+    }
+    case 'c':
+      system("clear");
+      break;
+
+    default:
+      std::cout << "ERROR (no such option). Input again." << std::endl;
+      break;
+    }
+  } while (checker != 'q');
+
+  return 0;
+}
+
+Linked_List::Linked_List() {
+  head = NULL;
+  end = NULL;
+}
+
+void Linked_List::Print_List() {
+  Node *current = head;
+
+  while (current != NULL) {
+    std::cout << current->data << std::endl;
+    current = current->next;
   }
 }
 
-int main() {
-  // int n;
-  // std::cout << "Input the lenght of the list: ";
-  // std::cin >> n;
+void Linked_List::Add_Node_End(std::string data) {
+  Node *temp = new Node;
+  temp->data = data;
+  temp->next = NULL;
 
-  // Node **list;
-  // *list = new Node[n+1];
-  // for (size_t i = 0; i <= n; i++) {
-  //   // *list[i] = new Node;
-  //   list[i] = NULL;
-  // }
-  // for (size_t i = 0; i < n; i++) {
-  //   std::cout << "Input data for the element " << i + 1 << ": ";
-  //   std::cin >> list[i]->data;
-  //   list[i]->next = list[i + 1]; // seg-fault (why?)
-  // }
-  // display_list(list[0]);
-
-  Node *n1 = NULL;
-  Node *n2 = NULL;
-  Node *n3 = NULL;
-  Node *n4 = NULL;
-
-  n1 = new Node;
-  n2 = new Node;
-  n3 = new Node;
-  n4 = new Node;
-
-  n1->data = 1;
-  n1->next = n2;
-
-  n2->data = 2;
-  n2->next = n3;
-
-  n3->data = 3;
-  n3->next = n4;
-
-  n4->data = 4;
-  n4->next = NULL;
-  display_list(n1);
-  return 0;
+  if (head == NULL) {
+    head = temp;
+    end = temp;
+  } else {
+    end->next = temp;
+    end = temp;
+  }
 }
