@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-std=c++20
-SOURCES=main.cc commands.cc
+SOURCES=main.cpp list.cpp colors.cpp other.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=exec.out
 

@@ -1,4 +1,6 @@
-#include "main.hh"
+#include "list.h"
+#include "colors.h"
+#include "other.h"
 
 // structure
 
@@ -10,15 +12,15 @@ struct Node {
 // class functions
 
 Linked_List::Linked_List() {
-  head = NULL;
-  end = NULL;
+  head = nullptr;
+  end = nullptr;
 }
 
 void Linked_List::Print_List() {
   Node *current = head;
   int i = 1;
 
-  while (current != NULL) {
+  while (current != nullptr) {
     std::cout << i << ") " << current->data << std::endl;
     current = current->next;
     i++;
@@ -30,9 +32,9 @@ void Linked_List::Print_List() {
 void Linked_List::Add_Node_End(std::string data) {
   Node *temp = new Node;
   temp->data = data;
-  temp->next = NULL;
+  temp->next = nullptr;
 
-  if (head == NULL) {
+  if (head == nullptr) {
     head = temp;
     end = temp;
   } else {
@@ -69,21 +71,21 @@ void Linked_List::Add_Node_Position(std::string data, int position) {
 }
 
 void Linked_List::Del_Node_End() {
-  if (head->next == NULL)
+  if (head->next == nullptr)
     delete head;
 
   Node *current = head;
 
-  while (current->next->next != NULL)
+  while (current->next->next != nullptr)
     current = current->next;
 
   delete current->next;
 
-  current->next = NULL;
+  current->next = nullptr;
 }
 
 void Linked_List::Del_Node_Start() {
-  Node *next_node = NULL;
+  Node *next_node = nullptr;
 
   next_node = head->next;
   std::string d = head->data;
@@ -95,7 +97,7 @@ void Linked_List::Del_Node_Start() {
 
 void Linked_List::Del_Node_Position(int position) {
   Node *current = head;
-  Node *temp_node = NULL;
+  Node *temp_node = nullptr;
 
   if (position == 1) {
     Linked_List::Del_Node_Start();
@@ -103,7 +105,7 @@ void Linked_List::Del_Node_Position(int position) {
   }
 
   for (size_t i = 1; i < position - 1; i++) {
-    if (current->next == NULL) {
+    if (current->next == nullptr) {
       Linked_List::Del_Node_End();
       return;
     }
@@ -127,43 +129,13 @@ void Linked_List::Edit_Data(std::string data, int position) {
 
 void Linked_List::Del_List() {
   Node *current = head;
-  Node *next = NULL;
+  Node *next = nullptr;
 
-  while (current != NULL) {
+  while (current != nullptr) {
     next = current->next;
     delete current;
     current = next;
   }
 
-  head = NULL;
-}
-
-// color functions
-
-std::string Black(std::string str) { return "\033[30m" + str + "\033[0m"; }
-
-std::string Red(std::string str) { return "\033[31m" + str + "\033[0m"; }
-
-std::string Green(std::string str) { return "\033[32m" + str + "\033[0m"; }
-
-std::string Orange(std::string str) { return "\033[33m" + str + "\033[0m"; }
-
-std::string Blue(std::string str) { return "\033[34m" + str + "\033[0m"; }
-
-std::string Purple(std::string str) { return "\033[35m" + str + "\033[0m"; }
-
-std::string Cyan(std::string str) { return "\033[36m" + str + "\033[0m"; }
-
-std::string Gray(std::string str) { return "\033[37m" + str + "\033[0m"; }
-
-std::string Bold(std::string str) { return "\033[1m" + str + "\033[0m"; }
-
-std::string Underline(std::string str) { return "\033[4m" + str + "\033[0m"; }
-
-void signalHandler(int position) {
-  if (position == 2) {
-    std::cout << std::endl
-              << Bold(Red(":( Use q option instead of Ctrl+C")) << std::endl;
-    exit(position);
-  }
+  head = nullptr;
 }

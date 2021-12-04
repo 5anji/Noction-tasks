@@ -1,27 +1,14 @@
-#include "main.hh"
+#include "colors.h"
+#include "list.h"
+#include "other.h"
 
 int main() {
   char checker;
   Linked_List *list = new Linked_List;
   signal(SIGINT, signalHandler);
-  
+
   do {
-    std::cout << Bold(Blue("1")) << Orange(" - Display the list") << std::endl;
-    std::cout << Bold(Blue("2")) << Orange(" - Add node at the end") << std::endl;
-    std::cout << Bold(Blue("3")) << Orange(" - Add node at the start") << std::endl;
-    std::cout << Bold(Blue("4")) << Orange(" - Add node at the ") + Bold(Orange("n")) + Orange(" position") << std::endl;
-    std::cout << Bold(Blue("5")) << Orange(" - Delete node from the end") << std::endl;
-    std::cout << Bold(Blue("6")) << Orange(" - Delete node from the start") << std::endl;
-    std::cout << Bold(Blue("7")) << Orange(" - Delete node from the ") + Bold(Orange("n")) + Orange(" position") << std::endl;
-    std::cout << Bold(Blue("8")) << Orange(" - Change data from the ") + Bold(Orange("n")) + Orange(" position") << std::endl;
-    std::cout << Bold(Blue("d")) << Orange(" - Fully delete the list") << std::endl;
-    std::cout << Bold(Blue("c")) << Orange(" - Clear Screen") << std::endl;
-    std::cout << Bold(Blue("q")) << Orange(" - Exit") << std::endl;
-    std::cout << std::endl;
-    std::cout << Bold(Green("Choose option >>> "));
-    std::cin >> checker;
-    std::cout << std::endl;
-    checker = tolower(checker);
+    display_menu(&checker);
 
     switch (checker) {
     case '1':
@@ -84,7 +71,8 @@ int main() {
       std::cout << "Exited." << std::endl;
       break;
     default:
-      std::cout << Bold(Red("\vERROR (no such option). Input again.\v")) << std::endl;
+      std::cout << Bold(Red("\vERROR (no such option). Input again.\v"))
+                << std::endl;
       break;
     }
   } while (checker != 'q');
