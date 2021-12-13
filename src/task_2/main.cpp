@@ -3,33 +3,34 @@
 #include "other.h"
 
 int main() {
-  char checker;
+  std::string checker;
   Linked_List *list = new Linked_List;
   Linked_List *list_copy = new Linked_List;
   signal(SIGINT, signalHandler);
+  init_map();
 
   do {
     display_menu(&checker);
 
-    switch (checker) {
-    case '1':
+    switch (str_val[checker]) {
+    case option_1:
       list->Print_List();
       break;
-    case '2': {
+    case option_2: {
       std::string temp;
       std::cout << "Input data: ";
       std::cin >> temp;
       list->Add_Node_End(temp);
       break;
     }
-    case '3': {
+    case option_3: {
       std::string temp;
       std::cout << "Input data: ";
       std::cin >> temp;
       list->Add_Node_Start(temp);
       break;
     }
-    case '4': {
+    case option_4: {
       std::string temp;
       int position;
       std::cout << "Input data: ";
@@ -39,20 +40,20 @@ int main() {
       list->Add_Node_Position(temp, position);
       break;
     }
-    case '5':
+    case option_5:
       list->Del_Node_End();
       break;
-    case '6':
+    case option_6:
       list->Del_Node_Start();
       break;
-    case '7': {
+    case option_7: {
       int position;
       std::cout << "Input position of node to delete: ";
       std::cin >> position;
       list->Del_Node_Position(position);
       break;
     }
-    case '8': {
+    case option_8: {
       std::string temp;
       int position;
       std::cout << "Input position of the targeted data: ";
@@ -62,21 +63,21 @@ int main() {
       list->Edit_Data(temp, position);
       break;
     }
-    case '9': {
+    case option_9: {
       list->Copy_List(*list_copy);
       break;
     }
-    case '0': {
+    case option_10: {
       list_copy->Print_List();
       break;
     }
-    case 'd':
+    case option_d:
       list->Del_List();
       break;
-    case 'c':
+    case option_c:
       system("clear");
       break;
-    case 'q':
+    case option_q:
       std::cout << "Exited." << std::endl;
       break;
     default:
@@ -84,7 +85,7 @@ int main() {
                 << std::endl;
       break;
     }
-  } while (checker != 'q');
+  } while (checker != "q");
 
   delete list;
   return 0;
