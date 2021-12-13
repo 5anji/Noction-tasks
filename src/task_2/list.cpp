@@ -139,3 +139,13 @@ void Linked_List::Del_List() {
 
   head = nullptr;
 }
+
+
+void Linked_List::Copy_List(Linked_List &copy){
+  Node *current = head;
+
+  while (current != nullptr) {
+    copy.Add_Node_End(current->data);
+    current = current->next;
+  }
+}

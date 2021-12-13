@@ -5,6 +5,7 @@
 int main() {
   char checker;
   Linked_List *list = new Linked_List;
+  Linked_List *list_copy = new Linked_List;
   signal(SIGINT, signalHandler);
 
   do {
@@ -59,6 +60,14 @@ int main() {
       std::cout << "Input new data: ";
       std::cin >> temp;
       list->Edit_Data(temp, position);
+      break;
+    }
+    case '9': {
+      list->Copy_List(*list_copy);
+      break;
+    }
+    case '0': {
+      list_copy->Print_List();
       break;
     }
     case 'd':

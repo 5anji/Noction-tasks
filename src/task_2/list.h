@@ -18,4 +18,5 @@ public:
   void Del_Node_Position(int position);
   void Edit_Data(std::string data, int position);
   void Del_List();
+  void Copy_List(Linked_List &copy);
 };
