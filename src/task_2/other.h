@@ -3,7 +3,7 @@
 #include <iostream>
 #include <map>
 
-enum str {
+enum class str {
   option_1,
   option_2,
   option_3,

@@ -11,20 +11,49 @@ struct Node {
 
 // class functions
 
-Linked_List::Linked_List() {
-  head = nullptr;
-  end = nullptr;
+Linked_List::Linked_List() : head(nullptr), end(nullptr) {}
+
+Linked_List::Linked_List(const std::string a) : head(nullptr), end(nullptr) {
+  Add_Node_End(a);
+}
+
+Linked_List::Linked_List(Linked_List &list) : head(nullptr), end(nullptr) {
+  Node *current = list.head;
+
+  while (current != nullptr) {
+    Add_Node_End(current->data);
+    current = current->next;
+  }
+}
+
+void Linked_List::operator=(Linked_List &copy) {
+  Del_List();
+  Node *current = copy.head;
+
+  while (current != nullptr) {
+    Add_Node_End(current->data);
+    current = current->next;
+  }
+}
+
+Linked_List::~Linked_List() {
+  Del_List();
 }
 
 void Linked_List::Print_List() {
   Node *current = head;
   int i = 1;
+  bool checker = true;
 
   while (current != nullptr) {
     std::cout << i << ") " << current->data << std::endl;
     current = current->next;
+    checker = false;
     i++;
   }
+
+  if (checker)
+    std::cout << "The list is empty" << std::endl;
 
   std::cout << std::endl;
 }
@@ -140,8 +169,7 @@ void Linked_List::Del_List() {
   head = nullptr;
 }
 
-
-void Linked_List::Copy_List(Linked_List &copy){
+void Linked_List::Copy_List(Linked_List &copy) {
   Node *current = head;
 
   while (current != nullptr) {

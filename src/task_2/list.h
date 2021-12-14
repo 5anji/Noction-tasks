@@ -9,6 +9,10 @@ private:
 
 public:
   Linked_List();
+  Linked_List(const std::string a);
+  Linked_List(Linked_List &list);
+  void operator=(Linked_List &copy);
+  ~Linked_List();
   void Print_List();
   void Add_Node_End(std::string data);
   void Add_Node_Start(std::string data);

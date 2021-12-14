@@ -34,17 +34,17 @@ void display_menu(std::string *a) {
 }
 
 void init_map() {
-  str_val["1"] = option_1;
-  str_val["2"] = option_2;
-  str_val["3"] = option_3;
-  str_val["4"] = option_4;
-  str_val["5"] = option_5;
-  str_val["6"] = option_6;
-  str_val["7"] = option_7;
-  str_val["8"] = option_8;
-  str_val["9"] = option_9;
-  str_val["10"] = option_10;
-  str_val["d"] = option_d;
-  str_val["c"] = option_c;
-  str_val["q"] = option_q;
+  str_val["1"] = str::option_1;
+  str_val["2"] = str::option_2;
+  str_val["3"] = str::option_3;
+  str_val["4"] = str::option_4;
+  str_val["5"] = str::option_5;
+  str_val["6"] = str::option_6;
+  str_val["7"] = str::option_7;
+  str_val["8"] = str::option_8;
+  str_val["9"] = str::option_9;
+  str_val["10"] = str::option_10;
+  str_val["d"] = str::option_d;
+  str_val["c"] = str::option_c;
+  str_val["q"] = str::option_q;
 }
