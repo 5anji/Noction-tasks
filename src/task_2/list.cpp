@@ -13,8 +13,14 @@ struct Node {
 
 Linked_List::Linked_List() : head(nullptr), end(nullptr) {}
 
-Linked_List::Linked_List(const std::string a) : head(nullptr), end(nullptr) {
-  Add_Node_End(a);
+Linked_List::Linked_List(std::string str) : head(nullptr), end(nullptr) {
+  Node *temp;
+  temp = new Node;
+
+  temp->data = str;
+  temp->next = head;
+
+  head = temp;
 }
 
 Linked_List::Linked_List(Linked_List &list) : head(nullptr), end(nullptr) {
@@ -82,14 +88,14 @@ void Linked_List::Add_Node_Start(std::string data) {
   head = temp;
 }
 
-void Linked_List::Add_Node_Position(std::string data, int position) {
+void Linked_List::Add_Node_Position(std::string data, size_t position) {
   Node *previous = new Node;
   Node *current = new Node;
   Node *temp = new Node;
 
   current = head;
 
-  for (int i = 1; i < position; i++) {
+  for (size_t i = 1; i < position; i++) {
     previous = current;
     current = current->next;
   }
@@ -117,14 +123,13 @@ void Linked_List::Del_Node_Start() {
   Node *next_node = nullptr;
 
   next_node = head->next;
-  std::string d = head->data;
 
   delete head;
 
   head = next_node;
 }
 
-void Linked_List::Del_Node_Position(int position) {
+void Linked_List::Del_Node_Position(size_t position) {
   Node *current = head;
   Node *temp_node = nullptr;
 
@@ -147,7 +152,7 @@ void Linked_List::Del_Node_Position(int position) {
   delete temp_node;
 }
 
-void Linked_List::Edit_Data(std::string data, int position) {
+void Linked_List::Edit_Data(std::string data, size_t position) {
   Node *current = head;
 
   for (size_t i = 1; i < position; i++)

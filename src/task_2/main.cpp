@@ -22,7 +22,8 @@ int main() {
   Linked_List list_copy("qwerty");
 
   list_copy = list;
-  list_copy.Del_Node_End();
+  // list_copy.Del_Node_End();
+  list_copy.Del_Node_Start();
   list_copy.Print_List();
 
   // list.~Linked_List();
