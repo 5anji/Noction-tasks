@@ -14,13 +14,8 @@ struct Node {
 Linked_List::Linked_List() : head(nullptr), end(nullptr) {}
 
 Linked_List::Linked_List(std::string str) : head(nullptr), end(nullptr) {
-  Node *temp;
-  temp = new Node;
-
-  temp->data = str;
-  temp->next = head;
-
-  head = temp;
+  Add_Node_End(str);
+  // Add_Node_End(str);
 }
 
 Linked_List::Linked_List(Linked_List &list) : head(nullptr), end(nullptr) {
@@ -106,17 +101,20 @@ void Linked_List::Add_Node_Position(std::string data, size_t position) {
 }
 
 void Linked_List::Del_Node_End() {
-  if (head->next == nullptr)
+  if (head->next == nullptr) {
+    head = nullptr;
     delete head;
+    return;
+  } else {
+    Node *current = head;
 
-  Node *current = head;
+    while (current->next->next != nullptr)
+      current = current->next;
 
-  while (current->next->next != nullptr)
-    current = current->next;
+    delete current->next;
 
-  delete current->next;
-
-  current->next = nullptr;
+    current->next = nullptr;
+  }
 }
 
 void Linked_List::Del_Node_Start() {

@@ -7,23 +7,25 @@
 
 
 int main() {
-  std::string checker;
-  Linked_List list;
+  // std::string checker;
+  // Linked_List list;
   // signal(SIGINT, signalHandler);
   // init_map();
-  list.Add_Node_End("Here");
-  list.Add_Node_End("is");
-  list.Add_Node_End("Andrei");
-  list.Add_Node_End("Vulpe");
-  list.Add_Node_End("AVE me");
+  // list.Add_Node_End("Here");
+  // list.Add_Node_End("is");
+  // list.Add_Node_End("Andrei");
+  // list.Add_Node_End("Vulpe");
+  // list.Add_Node_End("AVE me");
 
-  list.Print_List();
+  // list.Print_List();
 
   Linked_List list_copy("qwerty");
+  list_copy.Add_Node_End("hah");
 
-  list_copy = list;
-  // list_copy.Del_Node_End();
-  list_copy.Del_Node_Start();
+  list_copy.Print_List();
+  // list_copy = list;
+  list_copy.Del_Node_End();
+  // list_copy.Del_Node_Start();
   list_copy.Print_List();
 
   // list.~Linked_List();
