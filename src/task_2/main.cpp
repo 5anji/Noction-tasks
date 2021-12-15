@@ -26,7 +26,14 @@ int main() {
   // list_copy = list;
   list_copy.Del_Node_End();
   // list_copy.Del_Node_Start();
-  list_copy.Print_List();
+  // list_copy.Print_List();
+  
+  Linked_List x = list_copy; // 
+
+  x = x + "jora";
+  x += "vasea";
+  x = "donea" + x;
+  std::cout << x << std::endl;
 
   // list.~Linked_List();
   // list_copy.~Linked_List();

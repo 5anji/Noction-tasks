@@ -13,8 +13,12 @@ public:
   Linked_List(Linked_List &list);
   ~Linked_List();
 
-  void operator=(Linked_List &copy);
-  
+  void operator=(const Linked_List &copy);
+  Linked_List operator+(const std::string str);
+  friend Linked_List operator+(std::string str, Linked_List list);
+  void operator+=(const std::string str);
+  friend std::ostream &operator<<(std::ostream &os, const Linked_List list);
+
   void Print_List();
   void Add_Node_End(std::string data);
   void Add_Node_Start(std::string data);

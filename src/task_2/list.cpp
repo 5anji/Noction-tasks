@@ -15,7 +15,6 @@ Linked_List::Linked_List() : head(nullptr), end(nullptr) {}
 
 Linked_List::Linked_List(std::string str) : head(nullptr), end(nullptr) {
   Add_Node_End(str);
-  // Add_Node_End(str);
 }
 
 Linked_List::Linked_List(Linked_List &list) : head(nullptr), end(nullptr) {
@@ -27,7 +26,7 @@ Linked_List::Linked_List(Linked_List &list) : head(nullptr), end(nullptr) {
   }
 }
 
-void Linked_List::operator=(Linked_List &copy) {
+void Linked_List::operator=(const Linked_List &copy) {
   Del_List();
   Node *current = copy.head;
 
@@ -35,6 +34,40 @@ void Linked_List::operator=(Linked_List &copy) {
     Add_Node_End(current->data);
     current = current->next;
   }
+}
+
+Linked_List Linked_List::operator+(const std::string str) {
+  Add_Node_End(str);
+  return *this;
+}
+
+Linked_List operator+(const std::string str, Linked_List list) {
+  list.Add_Node_Start(str);
+  return list;
+}
+
+void Linked_List::operator+=(const std::string str) {
+  Add_Node_End(str);
+}
+
+std::ostream &operator<<(std::ostream &os, const Linked_List list) {
+  Node *current = list.head;
+  int i = 1;
+  bool checker = true;
+
+  while (current != nullptr) {
+    os << i << ") " << current->data << std::endl;
+    current = current->next;
+    checker = false;
+    i++;
+  }
+
+  if (checker)
+    os << "The list is empty" << std::endl;
+
+  os << std::endl;
+
+  return os;
 }
 
 Linked_List::~Linked_List() {
