@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-std=c++20 -Wall -O2
-SOURCES=main.cpp list.cpp colors.cpp other.cpp
+SOURCES=main.cpp list.cpp colors.cpp other.cpp menu.cpp
 EXECUTABLE=exec.out
 
 run: $(SOURCES)
