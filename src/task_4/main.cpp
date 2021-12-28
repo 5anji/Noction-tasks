@@ -24,7 +24,7 @@ int main() {
   int x = 10, y = 4;
   char op = '*';
 
-  //int (*fun_ptr[])(int, int) = {add, substract, multiply, divide};
+  // int (*fun_ptr[])(int, int) = {add, substract, multiply, divide};
 
   // std::cout << "Input expression: ";
   // std::cin >> x >> op >> y;
