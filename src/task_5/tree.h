@@ -2,25 +2,25 @@
 
 struct Node;
 
-typedef Node *NodePtr;
+// typedef Node *NodePtr;
 
 class RedBlackTree {
 private:
-  NodePtr root;
-  NodePtr TNULL;
+  Node* root;
+  Node* TNULL;
 
-  void initializeNULLNode(NodePtr node, NodePtr parent);
-  void preOrderHelper(NodePtr node);
-  void inOrderHelper(NodePtr node);
-  void postOrderHelper(NodePtr node);
+  void initializeNULLNode(Node* node, Node* parent);
+  void preOrderHelper(Node* node);
+  void inOrderHelper(Node* node);
+  void postOrderHelper(Node* node);
 
-  NodePtr searchTreeHelper(NodePtr node, int key);
+  Node* searchTreeHelper(Node* node, int key);
 
-  void deleteFix(NodePtr x);
-  void rbTransplant(NodePtr u, NodePtr v);
-  void deleteNodeHelper(NodePtr node, int key);
-  void insertFix(NodePtr k);
-  void printHelper(NodePtr root, std::string indent, bool last);
+  void deleteFix(Node* x);
+  void rbTransplant(Node* u, Node* v);
+  void deleteNodeHelper(Node* node, int key);
+  void insertFix(Node* k);
+  void printHelper(Node* root, std::string indent, bool last);
 
 public:
   RedBlackTree();
@@ -29,17 +29,17 @@ public:
   void inorder();
   void postorder();
 
-  NodePtr searchTree(int k);
-  NodePtr minimum(NodePtr node);
-  NodePtr maximum(NodePtr node);
-  NodePtr successor(NodePtr x);
-  NodePtr predecessor(NodePtr x);
+  Node* searchTree(int k);
+  Node* minimum(Node* node);
+  Node* maximum(Node* node);
+  Node* successor(Node* x);
+  Node* predecessor(Node* x);
 
-  void leftRotate(NodePtr x);
-  void rightRotate(NodePtr x);
+  void leftRotate(Node* x);
+  void rightRotate(Node* x);
   void insert(int key);
 
-  NodePtr getRoot();
+  Node* getRoot();
 
   void deleteNode(int data);
   void printTree();

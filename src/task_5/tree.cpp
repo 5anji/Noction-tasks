@@ -8,7 +8,7 @@ struct Node {
   int color;
 };
 
-void RedBlackTree::initializeNULLNode(NodePtr node, NodePtr parent) {
+void RedBlackTree::initializeNULLNode(Node *node, Node *parent) {
   node->data = 0;
   node->parent = parent;
   node->left = nullptr;
@@ -17,7 +17,7 @@ void RedBlackTree::initializeNULLNode(NodePtr node, NodePtr parent) {
 }
 
 // Preorder
-void RedBlackTree::preOrderHelper(NodePtr node) {
+void RedBlackTree::preOrderHelper(Node *node) {
   if (node != TNULL) {
     std::cout << node->data << " ";
     preOrderHelper(node->left);
@@ -26,7 +26,7 @@ void RedBlackTree::preOrderHelper(NodePtr node) {
 }
 
 // Inorder
-void RedBlackTree::inOrderHelper(NodePtr node) {
+void RedBlackTree::inOrderHelper(Node *node) {
   if (node != TNULL) {
     inOrderHelper(node->left);
     std::cout << node->data << " ";
@@ -35,7 +35,7 @@ void RedBlackTree::inOrderHelper(NodePtr node) {
 }
 
 // Post order
-void RedBlackTree::postOrderHelper(NodePtr node) {
+void RedBlackTree::postOrderHelper(Node *node) {
   if (node != TNULL) {
     postOrderHelper(node->left);
     postOrderHelper(node->right);
@@ -43,7 +43,7 @@ void RedBlackTree::postOrderHelper(NodePtr node) {
   }
 }
 
-NodePtr RedBlackTree::searchTreeHelper(NodePtr node, int key) {
+Node *RedBlackTree::searchTreeHelper(Node *node, int key) {
   if (node == TNULL || key == node->data) {
     return node;
   }
@@ -55,8 +55,8 @@ NodePtr RedBlackTree::searchTreeHelper(NodePtr node, int key) {
 }
 
 // For balancing the tree after deletion
-void RedBlackTree::deleteFix(NodePtr x) {
-  NodePtr s;
+void RedBlackTree::deleteFix(Node *x) {
+  Node *s;
   while (x != root && x->color == 0) {
     if (x == x->parent->left) {
       s = x->parent->right;
@@ -115,7 +115,7 @@ void RedBlackTree::deleteFix(NodePtr x) {
   x->color = 0;
 }
 
-void RedBlackTree::rbTransplant(NodePtr u, NodePtr v) {
+void RedBlackTree::rbTransplant(Node *u, Node *v) {
   if (u->parent == nullptr) {
     root = v;
   } else if (u == u->parent->left) {
@@ -126,9 +126,9 @@ void RedBlackTree::rbTransplant(NodePtr u, NodePtr v) {
   v->parent = u->parent;
 }
 
-void RedBlackTree::deleteNodeHelper(NodePtr node, int key) {
-  NodePtr z = TNULL;
-  NodePtr x, y;
+void RedBlackTree::deleteNodeHelper(Node *node, int key) {
+  Node *z = TNULL;
+  Node *x, *y;
   while (node != TNULL) {
     if (node->data == key) {
       z = node;
@@ -178,8 +178,8 @@ void RedBlackTree::deleteNodeHelper(NodePtr node, int key) {
 }
 
 // For balancing the tree after insertion
-void RedBlackTree::insertFix(NodePtr k) {
-  NodePtr u;
+void RedBlackTree::insertFix(Node *k) {
+  Node *u;
   while (k->parent->color == 1) {
     if (k->parent == k->parent->parent->right) {
       u = k->parent->parent->left;
@@ -222,7 +222,7 @@ void RedBlackTree::insertFix(NodePtr k) {
   root->color = 0;
 }
 
-void RedBlackTree::printHelper(NodePtr root, std::string indent, bool last) {
+void RedBlackTree::printHelper(Node *root, std::string indent, bool last) {
   if (root != TNULL) {
     std::cout << indent;
     if (last) {
@@ -260,30 +260,30 @@ void RedBlackTree::postorder() {
   postOrderHelper(this->root);
 }
 
-NodePtr RedBlackTree::searchTree(int k) {
+Node *RedBlackTree::searchTree(int k) {
   return searchTreeHelper(this->root, k);
 }
 
-NodePtr RedBlackTree::minimum(NodePtr node) {
+Node *RedBlackTree::minimum(Node *node) {
   while (node->left != TNULL) {
     node = node->left;
   }
   return node;
 }
 
-NodePtr RedBlackTree::maximum(NodePtr node) {
+Node *RedBlackTree::maximum(Node *node) {
   while (node->right != TNULL) {
     node = node->right;
   }
   return node;
 }
 
-NodePtr RedBlackTree::successor(NodePtr x) {
+Node *RedBlackTree::successor(Node *x) {
   if (x->right != TNULL) {
     return minimum(x->right);
   }
 
-  NodePtr y = x->parent;
+  Node *y = x->parent;
   while (y != TNULL && x == y->right) {
     x = y;
     y = y->parent;
@@ -291,12 +291,12 @@ NodePtr RedBlackTree::successor(NodePtr x) {
   return y;
 }
 
-NodePtr RedBlackTree::predecessor(NodePtr x) {
+Node *RedBlackTree::predecessor(Node *x) {
   if (x->left != TNULL) {
     return maximum(x->left);
   }
 
-  NodePtr y = x->parent;
+  Node *y = x->parent;
   while (y != TNULL && x == y->left) {
     x = y;
     y = y->parent;
@@ -305,8 +305,8 @@ NodePtr RedBlackTree::predecessor(NodePtr x) {
   return y;
 }
 
-void RedBlackTree::leftRotate(NodePtr x) {
-  NodePtr y = x->right;
+void RedBlackTree::leftRotate(Node *x) {
+  Node *y = x->right;
   x->right = y->left;
   if (y->left != TNULL) {
     y->left->parent = x;
@@ -323,8 +323,8 @@ void RedBlackTree::leftRotate(NodePtr x) {
   x->parent = y;
 }
 
-void RedBlackTree::rightRotate(NodePtr x) {
-  NodePtr y = x->left;
+void RedBlackTree::rightRotate(Node *x) {
+  Node *y = x->left;
   x->left = y->right;
   if (y->right != TNULL) {
     y->right->parent = x;
@@ -343,15 +343,15 @@ void RedBlackTree::rightRotate(NodePtr x) {
 
 // Inserting a node
 void RedBlackTree::insert(int key) {
-  NodePtr node = new Node;
+  Node *node = new Node;
   node->parent = nullptr;
   node->data = key;
   node->left = TNULL;
   node->right = TNULL;
   node->color = 1;
 
-  NodePtr y = nullptr;
-  NodePtr x = this->root;
+  Node *y = nullptr;
+  Node *x = this->root;
 
   while (x != TNULL) {
     y = x;
@@ -383,7 +383,7 @@ void RedBlackTree::insert(int key) {
   insertFix(node);
 }
 
-NodePtr RedBlackTree::getRoot() {
+Node *RedBlackTree::getRoot() {
   return this->root;
 }
 
