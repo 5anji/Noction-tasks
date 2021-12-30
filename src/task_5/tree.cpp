@@ -226,15 +226,14 @@ void RedBlackTree::printHelper(Node *root, std::string indent, bool last) {
   if (root != TNULL) {
     std::cout << indent;
     if (last) {
-      std::cout << "R----";
+      std::cout << Bold("R") << Orange("----");
       indent += "   ";
     } else {
-      std::cout << "L----";
-      indent += "|  ";
+      std::cout << Bold("L") << Orange("----");
+      indent += Orange("|  ");
     }
 
-    std::string sColor = root->color ? "RED" : "BLACK";
-    std::cout << root->data << "(" << sColor << ")" << std::endl;
+    std::cout << Bold(root->color ? Red(std::to_string(root->data)) : Blue(std::to_string(root->data))) << std::endl;
     printHelper(root->left, indent, false);
     printHelper(root->right, indent, true);
   }

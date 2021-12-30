@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-std=c++20 -Wall -O2
-SOURCES=main.cpp tree.cpp
+SOURCES=main.cpp tree.cpp colors.cpp
 EXECUTABLE=exec.out
 
 run: $(SOURCES)
