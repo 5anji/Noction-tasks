@@ -3,5 +3,5 @@
 #include "other.h"
 
 struct Menu {
-  void run(Linked_List &list);
+    void run(Linked_List& list);
 };
