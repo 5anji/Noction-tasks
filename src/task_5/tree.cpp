@@ -1,13 +1,5 @@
 #include "tree.h"
 
-struct Node {
-    int data;
-    Node* parent;
-    Node* left;
-    Node* right;
-    int color;
-};
-
 void RedBlackTree::initializeNULLNode(Node* node, Node* parent) {
     node->data = 0;
     node->parent = parent;
@@ -223,8 +215,7 @@ void RedBlackTree::printHelper(Node* root, std::string indent, bool last) {
             indent += Orange("|  ");
         }
 
-        std::cout << Bold(root->color ? Red(std::to_string(root->data)) : Blue(std::to_string(root->data)))
-                  << std::endl;
+        std::cout << Bold(root->color ? Red(std::to_string(root->data)) : Blue(std::to_string(root->data))) << std::endl;
         printHelper(root->left, indent, false);
         printHelper(root->right, indent, true);
     }

@@ -1,9 +1,14 @@
 #include "colors.h"
 
 #include <iostream>
-struct Node;
 
-// typedef Node *NodePtr;
+struct Node {
+    int data;
+    Node* parent;
+    Node* left;
+    Node* right;
+    int color;
+};
 
 class RedBlackTree {
 private:
