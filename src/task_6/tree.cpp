@@ -1,6 +1,7 @@
 #include "tree.h"
 
-void RedBlackTree::initializeNULLNode(Node* node, Node* parent) {
+template <typename Type>
+void RedBlackTree<Type>::initializeNULLNode(Node<Type>* node, Node<Type>* parent) {
     node->data = 0;
     node->parent = parent;
     node->left = nullptr;
@@ -9,7 +10,8 @@ void RedBlackTree::initializeNULLNode(Node* node, Node* parent) {
 }
 
 // Preorder
-void RedBlackTree::preOrderHelper(Node* node) {
+template <typename Type>
+void RedBlackTree<Type>::preOrderHelper(Node<Type>* node) {
     if (node != TNULL) {
         std::cout << node->data << " ";
         preOrderHelper(node->left);
@@ -18,7 +20,8 @@ void RedBlackTree::preOrderHelper(Node* node) {
 }
 
 // Inorder
-void RedBlackTree::inOrderHelper(Node* node) {
+template <typename Type>
+void RedBlackTree<Type>::inOrderHelper(Node<Type>* node) {
     if (node != TNULL) {
         inOrderHelper(node->left);
         std::cout << node->data << " ";
@@ -27,7 +30,8 @@ void RedBlackTree::inOrderHelper(Node* node) {
 }
 
 // Post order
-void RedBlackTree::postOrderHelper(Node* node) {
+template <typename Type>
+void RedBlackTree<Type>::postOrderHelper(Node<Type>* node) {
     if (node != TNULL) {
         postOrderHelper(node->left);
         postOrderHelper(node->right);
@@ -35,7 +39,8 @@ void RedBlackTree::postOrderHelper(Node* node) {
     }
 }
 
-Node* RedBlackTree::searchTreeHelper(Node* node, int key) {
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::searchTreeHelper(Node<Type>* node, Type key) {
     if (node == TNULL || key == node->data) { return node; }
 
     if (key < node->data) { return searchTreeHelper(node->left, key); }
@@ -43,8 +48,9 @@ Node* RedBlackTree::searchTreeHelper(Node* node, int key) {
 }
 
 // For balancing the tree after deletion
-void RedBlackTree::deleteFix(Node* x) {
-    Node* s;
+template <typename Type>
+void RedBlackTree<Type>::deleteFix(Node<Type>* x) {
+    Node<Type>* s;
     while (x != root && x->color == 0) {
         if (x == x->parent->left) {
             s = x->parent->right;
@@ -103,7 +109,8 @@ void RedBlackTree::deleteFix(Node* x) {
     x->color = 0;
 }
 
-void RedBlackTree::rbTransplant(Node* u, Node* v) {
+template <typename Type>
+void RedBlackTree<Type>::rbTransplant(Node<Type>* u, Node<Type>* v) {
     if (u->parent == nullptr) {
         root = v;
     } else if (u == u->parent->left) {
@@ -114,9 +121,10 @@ void RedBlackTree::rbTransplant(Node* u, Node* v) {
     v->parent = u->parent;
 }
 
-void RedBlackTree::deleteNodeHelper(Node* node, int key) {
-    Node* z = TNULL;
-    Node *x, *y;
+template <typename Type>
+void RedBlackTree<Type>::deleteNodeHelper(Node<Type>* node, Type key) {
+    Node<Type>* z = TNULL;
+    Node<Type>*x, *y;
     while (node != TNULL) {
         if (node->data == key) { z = node; }
 
@@ -162,8 +170,9 @@ void RedBlackTree::deleteNodeHelper(Node* node, int key) {
 }
 
 // For balancing the tree after insertion
-void RedBlackTree::insertFix(Node* k) {
-    Node* u;
+template <typename Type>
+void RedBlackTree<Type>::insertFix(Node<Type>* k) {
+    Node<Type>* u;
     while (k->parent->color == 1) {
         if (k->parent == k->parent->parent->right) {
             u = k->parent->parent->left;
@@ -204,7 +213,8 @@ void RedBlackTree::insertFix(Node* k) {
     root->color = 0;
 }
 
-void RedBlackTree::printHelper(Node* root, std::string indent, bool last) {
+template <typename Type>
+void RedBlackTree<Type>::printHelper(Node<Type>* root, std::string indent, bool last) {
     if (root != TNULL) {
         std::cout << indent;
         if (last) {
@@ -221,36 +231,44 @@ void RedBlackTree::printHelper(Node* root, std::string indent, bool last) {
     }
 }
 
-RedBlackTree::RedBlackTree() {
-    TNULL = new Node;
+template <typename Type>
+RedBlackTree<Type>::RedBlackTree() {
+    TNULL = new Node<Type>;
     TNULL->color = 0;
     TNULL->left = nullptr;
     TNULL->right = nullptr;
     root = TNULL;
 }
 
-void RedBlackTree::preorder() { preOrderHelper(this->root); }
+template <typename Type>
+void RedBlackTree<Type>::preorder() { preOrderHelper(this->root); }
 
-void RedBlackTree::inorder() { inOrderHelper(this->root); }
+template <typename Type>
+void RedBlackTree<Type>::inorder() { inOrderHelper(this->root); }
 
-void RedBlackTree::postorder() { postOrderHelper(this->root); }
+template <typename Type>
+void RedBlackTree<Type>::postorder() { postOrderHelper(this->root); }
 
-Node* RedBlackTree::searchTree(int k) { return searchTreeHelper(this->root, k); }
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::searchTree(int k) { return searchTreeHelper(this->root, k); }
 
-Node* RedBlackTree::minimum(Node* node) {
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::minimum(Node<Type>* node) {
     while (node->left != TNULL) { node = node->left; }
     return node;
 }
 
-Node* RedBlackTree::maximum(Node* node) {
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::maximum(Node<Type>* node) {
     while (node->right != TNULL) { node = node->right; }
     return node;
 }
 
-Node* RedBlackTree::successor(Node* x) {
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::successor(Node<Type>* x) {
     if (x->right != TNULL) { return minimum(x->right); }
-    
-    Node* y = x->parent;
+
+    Node<Type>* y = x->parent;
     while (y != TNULL && x == y->right) {
         x = y;
         y = y->parent;
@@ -258,10 +276,11 @@ Node* RedBlackTree::successor(Node* x) {
     return y;
 }
 
-Node* RedBlackTree::predecessor(Node* x) {
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::predecessor(Node<Type>* x) {
     if (x->left != TNULL) { return maximum(x->left); }
 
-    Node* y = x->parent;
+    Node<Type>* y = x->parent;
     while (y != TNULL && x == y->left) {
         x = y;
         y = y->parent;
@@ -270,8 +289,9 @@ Node* RedBlackTree::predecessor(Node* x) {
     return y;
 }
 
-void RedBlackTree::leftRotate(Node* x) {
-    Node* y = x->right;
+template <typename Type>
+void RedBlackTree<Type>::leftRotate(Node<Type>* x) {
+    Node<Type>* y = x->right;
     x->right = y->left;
     if (y->left != TNULL) { y->left->parent = x; }
     y->parent = x->parent;
@@ -286,8 +306,9 @@ void RedBlackTree::leftRotate(Node* x) {
     x->parent = y;
 }
 
-void RedBlackTree::rightRotate(Node* x) {
-    Node* y = x->left;
+template <typename Type>
+void RedBlackTree<Type>::rightRotate(Node<Type>* x) {
+    Node<Type>* y = x->left;
     x->left = y->right;
     if (y->right != TNULL) { y->right->parent = x; }
     y->parent = x->parent;
@@ -303,16 +324,17 @@ void RedBlackTree::rightRotate(Node* x) {
 }
 
 // Inserting a node
-void RedBlackTree::insert(int key) {
-    Node* node = new Node;
+template <typename Type>
+void RedBlackTree<Type>::insert(Type key) {
+    Node<Type>* node = new Node<Type>;
     node->parent = nullptr;
     node->data = key;
     node->left = TNULL;
     node->right = TNULL;
     node->color = 1;
 
-    Node* y = nullptr;
-    Node* x = this->root;
+    Node<Type>* y = nullptr;
+    Node<Type>* x = this->root;
 
     while (x != TNULL) {
         y = x;
@@ -342,10 +364,13 @@ void RedBlackTree::insert(int key) {
     insertFix(node);
 }
 
-Node* RedBlackTree::getRoot() { return this->root; }
+template <typename Type>
+Node<Type>* RedBlackTree<Type>::getRoot() { return this->root; }
 
-void RedBlackTree::deleteNode(int data) { deleteNodeHelper(this->root, data); }
+template <typename Type>
+void RedBlackTree<Type>::deleteNode(int data) { deleteNodeHelper(this->root, data); }
 
-void RedBlackTree::printTree() {
+template <typename Type>
+void RedBlackTree<Type>::printTree() {
     if (root) { printHelper(this->root, "", true); }
 }
