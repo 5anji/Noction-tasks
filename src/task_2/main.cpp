@@ -6,6 +6,7 @@ int main() {
 
     Menu m;
     m.run(list);
-
+    m.run(list, "qwerty",&Linked_List::Add_Node_End);
+    
     return 0;
 }
