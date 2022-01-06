@@ -1,6 +1,4 @@
-#ifndef COLORS_H
-#define COLORS_H
-
+#pragma once
 #include <string>
 
 std::string Black(std::string str);
@@ -13,5 +11,3 @@ std::string Cyan(std::string str);
 std::string Gray(std::string str);
 std::string Bold(std::string str);
 std::string Underline(std::string str);
-
-#endif
