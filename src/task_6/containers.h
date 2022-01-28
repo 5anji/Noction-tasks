@@ -22,15 +22,15 @@ private:
     std::vector<T> vec;
 
     void display_as_percent(uint64_t n, uint64_t i) {
-        if (i / (limit / 10) > 0 && i % (limit / 10) == 0)
-            std::cout << i / (limit / 100) << "%..." << std::flush;
+        if (i / (limit / 100) > 0 && i % (limit / 100) == 0)
+            std::cout << "\033[47m \033[0m" << std::flush;
     }
 public:
     void map_alloc() {
         clock_t start = clock();
 
         std::cout << "\tEstimating for map..." << std::endl
-                  << "\t";
+                  << "\t|";
 
         for (size_t i = 0; i <= limit; i++) {
             display_as_percent(limit, i);
@@ -38,7 +38,7 @@ public:
             // mp.insert({i, i+1});
         }
         mp_time_all = static_cast<double>(clock() - start) / CLOCKS_PER_SEC;
-        std::cout << "Finished" << std::endl;
+        std::cout << "|" << std::endl;
         std::cout << "\tTime taken: " << mp_time_all << std::endl
                   << std::endl;
     }
@@ -46,7 +46,7 @@ public:
         clock_t start = clock();
 
         std::cout << "\tEstimating for vector..." << std::endl
-                  << "\t";
+                  << "\t|";
 
         for (size_t i = 0; i <= limit; i++) {
             display_as_percent(limit, i);
@@ -54,7 +54,7 @@ public:
             vec.push_back(i);
         }
         vec_time_all = static_cast<double>(clock() - start) / CLOCKS_PER_SEC;
-        std::cout << "Finished" << std::endl;
+        std::cout << "|" << std::endl;
         std::cout << "\tTime taken: " << vec_time_all << std::endl
                   << std::endl;
     }
@@ -63,7 +63,7 @@ public:
         clock_t start = clock();
 
         std::cout << "\tEstimating for map..." << std::endl
-                  << "\t";
+                  << "\t|";
 
         for (size_t i = 0; i <= limit; i++) {
             uint64_t temp = i;
@@ -74,7 +74,7 @@ public:
             // auto chk = mp.find(temp);
         }
         mp_time_srch = static_cast<double>(clock() - start) / CLOCKS_PER_SEC;
-        std::cout << "Finished" << std::endl;
+        std::cout << "|" << std::endl;
         std::cout << "\tTime taken: " << mp_time_srch << std::endl
                   << std::endl;
     }
@@ -82,7 +82,7 @@ public:
         clock_t start = clock();
 
         std::cout << "\tEstimating for vector..." << std::endl
-                  << "\t";
+                  << "\t|";
 
         for (size_t i = 0; i <= limit; i++) {
             uint64_t temp = i;
@@ -92,7 +92,7 @@ public:
             auto chk = std::find(vec.begin(), vec.end(), i);
         }
         vec_time_srch = static_cast<double>(clock() - start) / CLOCKS_PER_SEC;
-        std::cout << "Finished" << std::endl;
+        std::cout << "|" << std::endl;
         std::cout << "\tTime taken: " << vec_time_srch << std::endl
                   << std::endl;
     }
