@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../container.h"
 #include "colors.h"
 
 #include <iostream>
@@ -15,7 +16,7 @@ struct Node_Tree {
 };
 
 template <typename T>
-class RedBlackTree {
+class RedBlackTree : public Container<T> {
 private:
     Node_Tree<T>* root;
     Node_Tree<T>* TNULL;
@@ -26,7 +27,7 @@ private:
         if (key < node->data) { return searchTreeHelper(node->left, key); }
         return searchTreeHelper(node->right, key);
     }
-    
+
     void initializeNULLNode(Node_Tree<T>* node, Node_Tree<T>* parent) {
         node->data = 0;
         node->parent = parent;
@@ -364,7 +365,7 @@ public:
     void Print_Tree() {
         if (root) { printHelper(this->root, "", true); }
     }
-    void Print_Tree_Raw() {
+    void Print_Raw() {
         if (root) { printHelperRaw(this->root, true); }
     }
 };

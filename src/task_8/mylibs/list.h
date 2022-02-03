@@ -1,10 +1,10 @@
 #pragma once
 
+#include "../container.h"
 #include "colors.h"
 
 #include <iostream>
 #include <sstream>
-
 template <typename T>
 struct Node_List {
     T data;
@@ -12,7 +12,7 @@ struct Node_List {
 };
 
 template <typename T>
-class Linked_List {
+class Linked_List : public Container<T> {
 private:
     Node_List<T>* head;
     Node_List<T>* end;
@@ -109,7 +109,7 @@ public:
 
         std::cout << std::endl;
     }
-    void Print_List_Raw() {
+    void Print_Raw() {
         Node_List<T>* current = head;
         bool checker = true;
 
