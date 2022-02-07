@@ -61,7 +61,6 @@ int main() {
     Mammals m;
     Animals* a1, *a2, *a3;
 
-    
     a1 = &d;
     a2 = reinterpret_cast<Animals*>(&c);
     a3 = &m;
@@ -69,6 +68,7 @@ int main() {
     vec.push_back(a1);
     vec.push_back(a2);
     vec.push_back(a3);
+    
     for (size_t i = 0; i < vec.size(); i++) {
         vec[i]->say();
     }
