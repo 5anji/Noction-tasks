@@ -4,7 +4,6 @@ class int_A;
 class int_B;
 
 class int_A {
-    friend class int_B;
     int a = 0;
 
 public:
@@ -14,17 +13,20 @@ public:
     int get() {
         return a;
     }
+
     operator int();
     void operator=(const int x);
-    void operator=(int_B x);
+    // friend int_A& operator=(int_A& y, int_B x);
     int operator+(const int x);
     int operator+(int_B x);
+    friend class int_B;
 };
 
 class int_B {
     int b = 0;
 
 public:
+    int_B() = default;
     void set(const int x) {
         b = x;
     }
@@ -32,15 +34,25 @@ public:
         return b;
     }
     operator int();
+    int_B(int_A obj_a) {
+        this->b = obj_a.a;
+    }
+
     void operator=(const int x);
     void operator=(int_A x);
     int operator+(const int x);
     int operator+(int_A x);
+    // friend int_A& operator=(int_A& y, int_B x);
 };
 
-void int_A::operator=(int_B x) {
-    a = x.get();
-}
+// int_A& operator= (int_A& y, int_B& x) {
+//     y.a = x.b;
+//     return y;
+// }
+
+// void int_A::operator=(int_B x) {
+//     a = x.get();
+// }
 
 int int_A::operator+(int_B x) {
     return a + x.get();
